@@ -1,26 +1,26 @@
 import React from 'react';
-import { StyleSheet, View, Text, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
 export default function Card(props) {
   return (
-    <View style={styles.card}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Title</Text>
+    <TouchableOpacity onPress={() => props.navigation.navigate('HomeDetail', { houseId: props.id })}>
+      <View style={styles.card}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{ props.title.length > 30 ? props.title.slice(0, 30) + '...' : props.title }</Text>
+        </View>
+        <View style={styles.imageContainer}>
+          <ImageBackground source={{ uri: props.image }} style={styles.image}>
+            <Text style={styles.price}>€{ props.price }</Text>
+            <View style={styles.yearContainer}>
+              <Text style={styles.year}>{ props.yearBuilt }</Text>
+            </View>
+          </ImageBackground>
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>{ props.description.length > 100 ? props.description.slice(0, 100) + '...' : props.description }</Text>
+        </View>
       </View>
-      <View style={styles.imageContainer}>
-        <ImageBackground
-          style={styles.image}
-        >
-          <Text style={styles.price}>€200.000</Text>
-          <View style={styles.yearContainer}>
-            <Text style={styles.year}>2020</Text>
-          </View>
-        </ImageBackground>
-      </View>
-      <View style={styles.descriptionContainer}>
-        <Text style={styles.description}>Description</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
